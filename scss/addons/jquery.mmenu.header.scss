@@ -1,0 +1,109 @@
+//	CSS for the searchfield
+
+@import "../inc/variables";
+
+.mm-header
+{
+	@include vendor-prefix( "box-sizing", border-box );
+	@include font;
+
+	background: inherit;
+	border-bottom: 1px solid transparent;
+	text-align: center;
+	line-height: $btnSize - ( $padding * 2 );
+	width: 100%;
+	height: $btnSize + ( $padding * 2 );
+	padding: ( $padding * 3 ) $btnSize 0 $btnSize;
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	left: 0;
+
+	span
+	{
+		@include ellipsis;
+
+		display: inline-block;
+		width: 100%;
+		position: relative;
+		z-index: 1;
+	}
+
+	a
+	{
+		@include vendor-prefix( 'box-sizing', border-box );
+
+		text-decoration: none;
+		display: block;
+		width: $btnSize;
+		height: 100%;
+		position: absolute;
+		bottom: 0;
+
+		&:before
+		{
+			@include arrow;
+		}
+
+		&.mm-prev
+		{
+			left: 0;
+	
+			&:before
+			{
+				@include arrow-prev;
+				left: 22px;
+			}
+		}
+		&.mm-next
+		{
+			right: 0;
+	
+			&:before
+			{
+				@include arrow-next;
+				right: 18px;
+			}
+		}
+	}
+}
+
+.mm-hassearch .mm-header
+{
+	height: $btnSize + $padding;
+	padding-top: $padding * 2;
+	top: $btnSize + $padding;
+}
+
+$hTop: $btnSize + ( $padding * 2 );
+$sTop: ( $btnSize * 2 ) + ( $padding * 2 );
+.mm-menu.mm-hasheader
+{
+	li.mm-subtitle
+	{
+		display: none;
+	}
+	.mm-panel
+	{
+		padding-top: $hTop + ( $padding * 2 );
+	}
+	&.mm-hassearch .mm-panel
+	{
+		padding-top: $sTop + ( $padding * 2 );
+	}
+	&.mm-ismenu
+	{
+		.mm-panel
+		{
+			padding-top: $hTop;
+		}
+		&.mm-hassearch .mm-panel
+		{
+			padding-top: $sTop;
+		}
+	}
+}
+
+
+
+@include colors_header;
