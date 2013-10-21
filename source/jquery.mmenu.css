@@ -166,7 +166,10 @@ html.mm-blocking #mm-blocker {
   bottom: 0;
   left: 0; }
 .mm-list > li:not(.mm-subtitle):not(.mm-label):not(.mm-noresults):after {
-  left: 20px; }
+  width: auto;
+  margin-left: 20px;
+  position: relative;
+  left: auto; }
 .mm-list a.mm-subopen {
   width: 40px;
   height: 100%;
@@ -217,9 +220,9 @@ html.mm-blocking #mm-blocker {
   display: block;
   width: 7px;
   height: 7px;
-  margin-top: -5px;
+  margin-bottom: -5px;
   position: absolute;
-  top: 50%;
+  bottom: 50%;
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
@@ -232,7 +235,7 @@ html.mm-blocking #mm-blocker {
 .mm-list a.mm-subclose:before {
   border-right: none;
   border-bottom: none;
-  margin-top: 6px;
+  margin-bottom: -15px;
   left: 22px; }
 
 .mm-menu.mm-vertical .mm-list .mm-panel {

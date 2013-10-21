@@ -168,6 +168,8 @@ html.mm-blocking #mm-blocker
 		}
 	}
 }
+
+//	Lists
 .mm-menu
 {
 	> .mm-list
@@ -232,7 +234,10 @@ html.mm-blocking #mm-blocker
 		@include border-bottom;
 		&:after
 		{
-			left: ( $padding * 2 );
+			width: auto;
+			margin-left: ( $padding * 2 );
+			position: relative;
+			left: auto;
 		}
 	}
 
@@ -319,7 +324,7 @@ html.mm-blocking #mm-blocker
 	a.mm-subclose:before
 	{
 		@include arrow-prev;
-		margin-top: 6px;
+		margin-bottom: -( $padding * 2 ) + 5;
 		left: 22px;
 	}
 }

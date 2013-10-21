@@ -45,14 +45,15 @@
       display: block;
       width: 7px;
       height: 7px;
-      margin-top: -5px;
+      margin-bottom: -5px;
       position: absolute;
-      top: 50%;
+      bottom: 50%;
       -webkit-transform: rotate(-45deg);
       -moz-transform: rotate(-45deg);
       -ms-transform: rotate(-45deg);
       -o-transform: rotate(-45deg);
-      transform: rotate(-45deg); }
+      transform: rotate(-45deg);
+      margin-bottom: -15px; }
     .mm-header a.mm-prev {
       left: 0; }
       .mm-header a.mm-prev:before {
@@ -70,6 +71,8 @@
   height: 50px;
   padding-top: 20px;
   top: 50px; }
+  .mm-hassearch .mm-header a:before {
+    margin-bottom: -10px; }
 
 .mm-menu.mm-hasheader li.mm-subtitle {
   display: none; }

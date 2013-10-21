@@ -2,6 +2,10 @@
 
 @import "../inc/variables";
 
+$height: 60px;
+$padding: 10px;
+$paddingTop: $height / 2;
+
 .mm-header
 {
 	@include vendor-prefix( "box-sizing", border-box );
@@ -10,10 +14,10 @@
 	background: inherit;
 	border-bottom: 1px solid transparent;
 	text-align: center;
-	line-height: $btnSize - ( $padding * 2 );
+	line-height: $padding * 2;
 	width: 100%;
-	height: $btnSize + ( $padding * 2 );
-	padding: ( $padding * 3 ) $btnSize 0 $btnSize;
+	height: $height;
+	padding: $paddingTop $btnSize 0 $btnSize;
 	position: absolute;
 	z-index: 2;
 	top: 0;
@@ -43,6 +47,7 @@
 		&:before
 		{
 			@include arrow;
+			margin-bottom: -( $padding + 5 );
 		}
 
 		&.mm-prev
@@ -70,13 +75,18 @@
 
 .mm-hassearch .mm-header
 {
-	height: $btnSize + $padding;
-	padding-top: $padding * 2;
+	height: $height - $padding;
+	padding-top: $paddingTop - $padding;
 	top: $btnSize + $padding;
+
+	a:before
+	{
+		margin-bottom: -( ( $padding / 2 ) + 5 );
+	}
 }
 
-$hTop: $btnSize + ( $padding * 2 );
-$sTop: ( $btnSize * 2 ) + ( $padding * 2 );
+$hTop: $height;
+$sTop: $height + $btnSize;
 .mm-menu.mm-hasheader
 {
 	li.mm-subtitle
