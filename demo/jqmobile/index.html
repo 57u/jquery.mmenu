@@ -19,8 +19,8 @@
 				$('#menu').mmenu({
 					onClick		: {
 						blockUI			: false,
-						setLocationHref	: function() {
-							return this.rel == 'external';
+						preventDefault	: function() {
+							return this.rel != 'external';
 						}
 					}
 				}, {
