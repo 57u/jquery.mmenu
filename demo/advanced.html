@@ -38,7 +38,9 @@
 			//	The menu on the right
 			$(function() {
 
-				$('nav#menu-right').mmenu({
+				var $menu = $('nav#menu-right');
+
+				$menu.mmenu({
 					position	: 'right',
 					classes		: 'mm-light',
 					counters	: true,
@@ -52,7 +54,7 @@
 
 				//	Click a menu-item
 				var $confirm = $('#confirmation');
-				$('#menu-right li a').not( '.mm-subopen' ).not( '.mm-subclose' ).bind(
+				$menu.find( 'li a' ).not( '.mm-subopen' ).not( '.mm-subclose' ).bind(
 					'click.example',
 					function( e )
 					{

@@ -55,20 +55,7 @@
 				var $menu = $('nav#menu'),
 					$html = $('html, body');
 
-				$menu.mmenu({
-					onClick: {
-
-						//	set the location.href after the menu closes
-						setLocationHref: function()
-						{
-							var href = $(this).attr( 'href' );
-							
-							//	set location.href only if the clicked link is not linked to an anchor
-							return href.slice( 0, 1 ) != '#';
-						}
-					}
-				});
-				
+				$menu.mmenu();
 				$menu.find( 'li > a' ).on(
 					'click',
 					function()

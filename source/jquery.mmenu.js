@@ -1,5 +1,5 @@
 /*	
- * jQuery mmenu v4.0.1
+ * jQuery mmenu v4.0.2
  * @requires jQuery 1.7.0 or later
  *
  * mmenu.frebsite.nl
@@ -16,7 +16,7 @@
 (function( $ ) {
 
 	var _PLUGIN_	= 'mmenu',
-		_VERSION_	= '4.0.1';
+		_VERSION_	= '4.0.2';
 
 
 	//	Plugin already excists
@@ -593,6 +593,7 @@
 			var $a = $('ul.' + _c.list + ' > li > a', this.$menu)
 				.not( '.' + _c.subopen )
 				.not( '.' + _c.subclose )
+//				.not( '[href^="#"]' )
 				.not( '[rel="external"]' )
 				.not( '[target="_blank"]' );
 
@@ -603,27 +604,29 @@
 						var $t = $(this),
 							href = $t.attr( 'href' );
 	
-						//	go to new page
-						if ( !that.__valueOrFn( that.opts.onClick.setLocationHref, $t, href != '#' ) )
-						{
-							e.preventDefault();
-							e.stopPropagation();
-						}
 
-						//	set selected item
+						//	Set selected item
 						if ( that.__valueOrFn( that.opts.onClick.setSelected, $t ) )
 						{
 							$t.parent().trigger( _e.setSelected );
 						}
 
-						//	block UI
-						if ( that.__valueOrFn( that.opts.onClick.blockUI, $t, href.slice( 0, 1 ) != '#' ) )
+						//	Prevent default / don't follow link. Default: false
+						var preventDefault = that.__valueOrFn( that.opts.onClick.preventDefault, $t, href.slice( 0, 1 ) == '#' );
+						if ( preventDefault )
+						{
+							e.preventDefault();
+							e.stopPropagation();
+						}
+
+						//	Block UI. Default: false if preventDefault, true otherwise
+						if ( that.__valueOrFn( that.opts.onClick.blockUI, $t, !preventDefault ) )
 						{
 							glbl.$html.addClass( _c.blocking );
 						}
 
-						//	close menu
-						if ( that.__valueOrFn( that.opts.onClick.close, $t ) )
+						//	Close menu. Default: true if preventDefault, false otherwise
+						if ( that.__valueOrFn( that.opts.onClick.close, $t, preventDefault ) )
 						{
 							that.$menu.triggerHandler( _e.close );
 						}
@@ -719,12 +722,10 @@
 		modal			: false,
 		classes			: '',
 		onClick			: {
-			close				: true,
-			setSelected			: true,
+//			close				: true,
 //			blockUI				: null,
-//			callback			: null,
-//			setLocationHref		: null,
-			delayLocationHref	: true
+//			preventDefault		: null,
+			setSelected			: true
 		}
 	};
 	$[ _PLUGIN_ ].configuration = {
@@ -848,16 +849,21 @@
 
 
 		//	Extend onClick
-		if ( typeof o.onClick == 'boolean' )
-		{
-			o.onClick = {
-				close	: o.onClick
-			};
-		}
 		if ( typeof o.onClick != 'object' )
 		{
 			o.onClick = {};
 		}
+
+		//	DEPRECATED
+		if ( typeof o.onClick.setLocationHref != 'undefined' )
+		{
+			$[ _PLUGIN_ ].deprecated( 'onClick.setLocationHref option', '!onClick.preventDefault' );
+			if ( typeof o.onClick.setLocationHref == 'boolean' )
+			{
+				o.onClick.preventDefault = !o.onClick.setLocationHref;
+			}
+		}
+		//	/DEPRECATED
 
 
 		//	Extend from defaults
